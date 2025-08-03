@@ -1,0 +1,467 @@
+/* Basic CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables for easier theming */
+:root {
+    --primary-bg: #0A0A0A; /* Deep Black */
+    --secondary-bg: #1A1A1A; /* Slightly lighter black for contrast */
+    --text-color: #F8F8F8; /* Off-white for readability */
+    --light-grey: #BBBBBB;
+    --accent-color: #FFC300; /* New rich gold/yellow for African inclusion */
+    --accent-hover: #FFD700; /* A slightly brighter gold for hover state */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
+    --padding-section: 60px 0; /* Standard section padding */
+    --container-width: 1200px;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--primary-bg);
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* General Layout */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: var(--padding-section);
+}
+
+.bg-dark-alt {
+    background-color: var(--secondary-bg);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 40px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--text-color);
+    margin-bottom: 0.8em;
+}
+
+h1 {
+    font-size: 2.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    color: var(--accent-color); /* Highlight section titles */
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+p {
+    margin-bottom: 1em;
+    color: var(--light-grey);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* Header */
+.main-header {
+    background-color: var(--secondary-bg);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Adjust logo size */
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 1.5em;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    font-weight: 600;
+    color: var(--light-grey);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+}
+
+.hamburger-menu {
+    display: none; /* Hidden on desktop */
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('https://via.placeholder.com/1920x600/111/444?text=YAAD+MOVEMENT+HERO') no-repeat center center/cover; /* Placeholder hero image */
+    text-align: center;
+    color: var(--text-color);
+    padding: 100px 20px;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    max-width: 600px;
+    margin: 20px auto;
+    color: var(--light-grey);
+}
+
+/* Merch Section */
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.merch-item {
+    background-color: var(--primary-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.merch-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.merch-item img {
+    max-width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 15px;
+    background-color: var(--secondary-bg); /* Placeholder background */
+}
+
+.merch-item h3 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.merch-item .price {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+/* Events Grid */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.event-card {
+    background-color: var(--primary-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.event-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background: url('https://via.placeholder.com/400x180/222/555?text=Event+Image') no-repeat center center/cover; /* Placeholder image */
+}
+
+.event-info {
+    padding: 20px;
+}
+
+.event-info h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.event-info .event-date {
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.event-info .event-description {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+}
+
+.event-info .btn {
+    margin-top: 10px;
+}
+
+
+/* About Us Section */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-main {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 60px;
+    justify-content: center;
+}
+
+.about-image-placeholder {
+    min-width: 250px;
+    width: 35%;
+    height: 300px;
+    background: url('https://via.placeholder.com/400x300/222/555?text=About+Image') no-repeat center center/cover; /* Placeholder for band/movement image */
+    border-radius: var(--border-radius-md);
+    flex-grow: 1; /* Allows it to grow and shrink */
+}
+
+.about-text {
+    flex-grow: 2; /* Allows it to take more space */
+    max-width: 600px; /* Control max width for readability */
+}
+
+.about-text h3 {
+    color: var(--accent-color);
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+}
+
+/* Members Grid */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.member-card {
+    background-color: var(--primary-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.member-image-placeholder {
+    width: 120px;
+    height: 120px;
+    background: url('https://via.placeholder.com/120/333/666?text=Member') no-repeat center center/cover; /* Placeholder for member image */
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 3px solid var(--accent-color); /* Highlight members */
+}
+
+.member-card h4 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.member-card .member-role {
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.member-card .member-description {
+    font-size: 0.85em;
+    color: var(--light-grey);
+}
+
+
+/* Footer */
+.main-footer {
+    background-color: var(--secondary-bg);
+    padding: 30px 0;
+    text-align: center;
+    color: var(--light-grey);
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .logo {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .main-nav {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+        display: none; /* Hidden by default on mobile */
+    }
+
+    .nav-links.active {
+        display: flex; /* Shown when active */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .hamburger-menu {
+        display: block; /* Show hamburger on mobile */
+        position: absolute;
+        right: 20px;
+        top: 25px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+    }
+
+    .merch-grid, .event-grid, .members-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+
+    .about-main {
+        flex-direction: column; /* Stack image and text on mobile */
+    }
+    .about-image-placeholder {
+        width: 100%;
+    }
+}
