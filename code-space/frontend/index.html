@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="main-header">
+    <header class="main-header" id="mainHeader">
         <div class="container header-content">
             <div class="logo">
                 <img src="media/logo.jpg" alt="YAAD MOVEMENT Logo">
@@ -17,10 +17,10 @@
             </div>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li> 
+                    <li><a href="#hero">Home</a></li> 
                     <li><a href="#merch">Merch</a></li> 
                     <li><a href="#past-events">Events</a></li>
-                    <li><a href="#about">About Us</a></li> 
+                    <li><a href="#aboutus">About Us</a></li> 
                     <li><a href="#contact">Contact</a></li> 
                 </ul>
                 <div class="hamburger-menu">
@@ -32,46 +32,51 @@
 
     <main>
         <section id="hero" class="hero-section">
+            <div class="hero-picture">
+                <img src="media/yaad.jpg" alt="YAAD MOVEMENT Hero Image">
+            </div>
             <div class="hero-content">
                 <p>Empowering the Movement Through Music and Events</p>
-                </div>
+            </div>
         </section>
 
-        <section id="merch" class="section-padding">
+        <section id="merch" class="section-padding fade-in-section">
             <div class="container">
                 <h2>Merch</h2>
                 <div class="merch-grid">
                     <div class="merch-item">
                         <img src="assets/images/merch-placeholder-1.jpg" alt="Cosmic T-Shirt">
-                        <h3>Cosmic T-Shirt</h3> 
+                        <h3>MMISE T-Shirt</h3> 
                         <p class="price">R25.00</p> 
                         <a href="#" class="btn btn-small">Buy Now</a>
                     </div>
                     <div class="merch-item">
                         <img src="assets/images/merch-placeholder-2.jpg" alt="Vinyl Record">
                         <h3>Limited Edition Vinyl</h3> 
-                        <p class="price">$35.00</p> 
+                        <p class="price">R35.00</p> 
                         <a href="#" class="btn btn-small">Buy Now</a>
                     </div>
                     <div class="merch-item">
                         <img src="assets/images/merch-placeholder-3.jpg" alt="Band Hoodie">
                         <h3>YAAD Hoodie</h3> 
-                        <p class="price">$50.00</p> 
+                        <p class="price">R50.00</p> 
                         <a href="#" class="btn btn-small">Buy Now</a>
                     </div>
-                    </div>
+                </div>
                 <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline">See more V</a> 
+                    <a href="#" class="btn btn-outline">See more</a> 
                 </div>
             </div>
         </section>
 
-        <section id="past-events" class="section-padding bg-dark-alt">
+        <section id="past-events" class="section-padding bg-dark-alt fade-in-section">
             <div class="container">
                 <h2>WERE YOU THERE?</h2>
                 <div class="event-grid past-events-grid">
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Past+Event+1" alt="Past Event Image 1" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>Past Event: Summer Fest</h3>
                             <p class="event-date">July 20, 2024</p> 
@@ -79,26 +84,30 @@
                         </div>
                     </div>
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Past+Event+2" alt="Past Event Image 2" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>Past Event: Charity Gala</h3>
                             <p class="event-date">March 10, 2024</p> 
                             <p class="event-description">An evening dedicated to raising funds for local charities, with a powerful performance by the band.</p> 
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline">See more V</a> 
+                    <a href="#" class="btn btn-outline">See more</a> 
                 </div>
             </div>
         </section>
 
-        <section id="future-events" class="section-padding">
+        <section id="future-events" class="section-padding fade-in-section">
             <div class="container">
                 <h2>Are you coming?</h2> 
                 <div class="event-grid future-events-grid">
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Future+Event+1" alt="Future Event Image 1" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>BIG FUTURE EVENT: Annual Concert</h3>
                             <p class="event-date">December 31, 2025</p> 
@@ -107,7 +116,9 @@
                         </div>
                     </div>
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Future+Event+2" alt="Future Event Image 2" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>Next Gig: City Park Jam</h3>
                             <p class="event-date">August 15, 2025</p> 
@@ -116,7 +127,9 @@
                         </div>
                     </div>
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Future+Event+3" alt="Future Event Image 3" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>Local Show: The Beat Bar</h3>
                             <p class="event-date">September 5, 2025</p> 
@@ -125,7 +138,9 @@
                         </div>
                     </div>
                     <div class="event-card">
-                        <div class="event-image-placeholder"></div>
+                        <div class="event-image-wrapper">
+                            <img src="https://via.placeholder.com/600x400/222/555?text=Future+Event+4" alt="Future Event Image 4" class="event-image">
+                        </div>
                         <div class="event-info">
                             <h3>Band Workshop: Creativity Hub</h3>
                             <p class="event-date">October 1, 2025</p> 
@@ -133,21 +148,21 @@
                             <a href="#" class="btn btn-small">Buy Tickets</a> 
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline">See more V</a> 
+                    <a href="#" class="btn btn-outline">See more </a> 
                 </div>
             </div>
         </section>
 
-        <section id="about" class="section-padding bg-dark-alt">
+        <section id="aboutus" class="section-padding bg-dark-alt fade-in-section">
             <div class="container about-content">
                 <h2>About Us</h2> 
                 <div class="about-main">
                     <div class="about-image-placeholder"></div>
                     <div class="about-text">
                         <h3>Sta Revolution</h3> 
-                        <p>Sta Revolution is not just a band; it's a movement born from a shared passion for music and social change. [cite: 39] Founded in 20XX, our mission is to inspire, unite, and empower through rhythm and melody.</p>
+                        <p>Sta Revolution is not just a band; it's a movement born from a shared passion for music and social change. Founded in 20XX, our mission is to inspire, unite, and empower through rhythm and melody.</p>
                         <p>We believe in the transformative power of live events to bring people together, foster community, and amplify voices. Every performance, every managed event, is a step towards a more connected and vibrant world.</p>
                     </div>
                 </div>
@@ -183,10 +198,35 @@
                         <h4>The Founder Name</h4> 
                         <p class="member-role">Visionary & Manager</p>
                         <p class="member-description">The driving force behind the YAAD Movement.</p>
+                        <a href="#aboutme" class="btn btn-outline">See more </a>
                     </div>
                 </div>
                 <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline">See more V</a> 
+                     
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section-padding bg-dark-alt fade-in-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Have questions, suggestions, or just want to say hi? We'd love to hear from you!</p>
+                <form action="#" method="post" class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <h3>Follow Us</h3>
+                    <p>Stay connected with us on social media:</p>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -195,12 +235,45 @@
     <footer class="main-footer">
         <div class="container">
             <p>&copy; 2025 YAAD MOVEMENT. All rights reserved.</p>
-            </div>
+        </div>
     </footer>
 
     <script>
+        // Hamburger menu functionality
         document.querySelector('.hamburger-menu').addEventListener('click', () => {
             document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Header scroll effect (blur/transparency)
+        const mainHeader = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Adjust scroll threshold as needed
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in on scroll (Intersection Observer)
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of element visible to trigger
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
