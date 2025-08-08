@@ -408,8 +408,7 @@ a:hover {
 /* Members Grid - FIX FOR STACKING */
 .members-grid {
     display: grid;
-    /* Adjusted minmax to allow more members per row on larger screens */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    grid-template-columns: repeat(3, 1fr); /* 3 per row on desktop */
     gap: 25px;
     justify-content: center;
     margin-top: 30px;
@@ -603,8 +602,11 @@ a:hover {
         font-size: 1.2em;
     }
 
-    .merch-grid, .event-grid, .members-grid {
+    .merch-grid, .event-grid {
         grid-template-columns: 1fr; /* Single column on small screens */
+    }
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on phones */
     }
 
     .about-main {
@@ -642,5 +644,9 @@ a:hover {
     .btn {
         padding: 10px 20px;
         font-size: 0.9em;
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on very small screens */
     }
 }
