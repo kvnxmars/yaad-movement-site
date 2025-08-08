@@ -1,13 +1,63 @@
 
 
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import './App.css';
+
+const API_URL = 'http://localhost:5000/api';
 
 function App() {
   // Editable site colors
   const [primaryBg, setPrimaryBg] = useState('#0A0A0A');
   const [accentColor, setAccentColor] = useState('#FFC300');
   const [homepageText, setHomepageText] = useState('Welcome to the site!');
+  const [artistImages, setArtistImages] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch settings from backend
+  useEffect(() => {
+    fetch(`${API_URL}/settings`)
+      .then(res => res.json())
+      .then(data => {
+        setPrimaryBg(data.primaryBg || '#0A0A0A');
+        setAccentColor(data.accentColor || '#FFC300');
+        setHomepageText(data.homepageText || 'Welcome to the site!');
+        setArtistImages(data.artistImages || []);
+      });
+  }, []);
+
+  // Save settings to backend
+  const saveSettings = async () => {
+    setLoading(true);
+    await fetch(`${API_URL}/settings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ primaryBg, accentColor, homepageText, artistImages }),
+    });
+    setLoading(false);
+    alert('Settings saved!');
+  };
+
+  // Upload artist image
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    if (!imageFile) return;
+    const formData = new FormData();
+    formData.append('image', imageFile);
+    setLoading(true);
+    const res = await fetch(`${API_URL}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await res.json();
+    if (data.url) {
+      setArtistImages([...artistImages, data.url]);
+      setImageFile(null);
+      await saveSettings();
+    }
+    setLoading(false);
+  };
 
   return (
     <div
@@ -26,7 +76,7 @@ function App() {
       <header style={{ marginBottom: '2em', textAlign: 'center', width: '100%' }}>
         <h2 style={{ color: accentColor, fontSize: '2em', marginBottom: 8 }}>Admin Dashboard</h2>
         <p style={{ fontSize: '1em', color: '#BBBBBB' }}>
-          Edit your site colors and homepage text below. Changes are instant!
+          Edit your site colors, homepage text, and artist images below. Changes are instant!
         </p>
       </header>
       <div
@@ -77,6 +127,20 @@ function App() {
               style={{ width: '100%', minHeight: 60, borderRadius: 5, border: `1px solid ${accentColor}`, padding: 8, fontSize: '1em' }}
             />
           </div>
+          <div style={{ marginBottom: 20 }}>
+            <form onSubmit={handleImageUpload}>
+              <label style={{ display: 'block', marginBottom: 8 }}>Add Artist Image</label>
+              <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files[0])} style={{ marginBottom: 10 }} />
+              <button type="submit" disabled={loading || !imageFile} style={{ padding: '8px 16px', borderRadius: 5, background: accentColor, color: primaryBg, border: 'none', fontWeight: 600 }}>
+                {loading ? 'Uploading...' : 'Upload Image'}
+              </button>
+            </form>
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <button onClick={saveSettings} disabled={loading} style={{ padding: '10px 20px', borderRadius: 5, background: accentColor, color: primaryBg, border: 'none', fontWeight: 600 }}>
+              {loading ? 'Saving...' : 'Save All Changes'}
+            </button>
+          </div>
         </section>
         <section
           style={{
@@ -101,6 +165,11 @@ function App() {
             }}
           >
             <h1 style={{ color: accentColor }}>{homepageText}</h1>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginTop: 20 }}>
+              {artistImages.map((img, idx) => (
+                <img key={idx} src={`http://localhost:5000${img}`} alt={`Artist ${idx + 1}`} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 10, border: `2px solid ${accentColor}` }} />
+              ))}
+            </div>
           </div>
         </section>
       </div>
