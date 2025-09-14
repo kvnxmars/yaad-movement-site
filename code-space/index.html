@@ -814,7 +814,7 @@ p {
     <header class="main-header" id="mainHeader">
         <div class="container header-content">
             <div class="logo">
-                <img src="media/logo.jpg" alt="YAAD MOVEMENT Logo">
+                <img src="logo.jpg" alt="YAAD MOVEMENT Logo">
                 <h1>YAAD MOVEMENT</h1> 
             </div>
             <nav class="main-nav">
@@ -834,7 +834,7 @@ p {
     <main>
         <section id="hero" class="hero-section">
             <div class="hero-picture">
-                <img src="media/yaad.jpg" alt="YAAD MOVEMENT Hero Image">
+                <img src="yaad.jpg" alt="YAAD MOVEMENT Hero Image">
             </div>
             <div class="hero-content">
                 <h1>YAAD MOVEMENT</h1>
@@ -859,7 +859,7 @@ p {
                 <div class="event-grid past-events-grid">
                     <div class="event-card" data-tilt>
                         <div class="event-image-wrapper">
-                            <img class="event-image" src="media/wjs.jpg" alt="Winter Jam Sessions">
+                            <img class="event-image" src="wjs.jpg" alt="Winter Jam Sessions">
                         </div>
                         <div class="event-info">
                             <h3>Winter Jam Sessions</h3>
@@ -878,7 +878,7 @@ p {
                 <div class="event-grid future-events-grid">
                     <div class="event-card" data-tilt>
                         <div class="event-image-wrapper">
-                            <img class="event-image" src="media/ECHOES.jpg" alt="Echoes of Revolution">
+                            <img class="event-image" src="ECHOES.jpg" alt="Echoes of Revolution">
                         </div>
                         <div class="event-info">
                             <h3>Echoes of Revolution</h3>
@@ -908,19 +908,19 @@ p {
                 <h3>Music Categories We Celebrate</h3> 
                 <div class="members-grid">
                     <div class="member-card" data-tilt>
-                        <img class="category-image" src="media/cat3.jpg" alt="Afro Jazz">
+                        <img class="category-image" src="cat3.jpg" alt="Afro Jazz">
                         <h4>Afro Jazz/Afro Soul</h4>
                     </div>
                     <div class="member-card" data-tilt>
-                        <img class="category-image" src="media/category 1.jpg" alt="Modern RNB">
+                        <img class="category-image" src="category 1.jpg" alt="Modern RNB">
                         <h4>Modern RNB/Commercial RNB</h4>
                     </div>
                     <div class="member-card" data-tilt>
-                        <img class="category-image" src="media/cat2.jpg" alt="Classical Music">
+                        <img class="category-image" src="cat2.jpg" alt="Classical Music">
                         <h4>Classical Music</h4>
                     </div>
                     <div class="member-card" data-tilt>
-                        <img class="category-image" src="media/cat4.jpg" alt="Soulful Amapiano">
+                        <img class="category-image" src="cat4.jpg" alt="Soulful Amapiano">
                         <h4>Soulful Amapiano</h4>
                     </div>
                 </div>
@@ -952,7 +952,7 @@ p {
             <div class="container">
                 <h2>Get In Touch</h2>
                 <p>Have questions, suggestions, or just want to say hi? We'd love to hear from you!</p>
-                <form action="#" method="post" class="contact-form" id="contactForm">
+                <form action="https://your-backend-api.com/send-message" method="post" class="contact-form" id="contactForm">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -1112,69 +1112,98 @@ p {
 
         // Enhanced Contact Form
         const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
+const notificationContainer = document.createElement('div');
+notificationContainer.id = 'notification-container';
+document.body.appendChild(notificationContainer);
 
-            // Simple validation
-            if (!name || !email || !message) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notificationContainer.appendChild(notification);
+    setTimeout(() => {
+        notification.classList.add('hide');
+        setTimeout(() => notification.remove(), 500);
+    }, 3000);
+}
 
-            // Simulate form submission
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-            setTimeout(() => {
-                showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
 
-        // Notification system
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 100px;
-                    right: 20px;
-                    background: ${type === 'success' ? 'var(--gradient-1)' : '#ff4444'};
-                    color: var(--primary-bg);
-                    padding: 15px 20px;
-                    border-radius: var(--border-radius-sm);
-                    box-shadow: var(--shadow-dark);
-                    z-index: 10000;
-                    font-weight: 600;
-                    max-width: 300px;
-                    transform: translateX(400px);
-                    transition: transform 0.3s ease;
-                ">
-                    ${message}
-                    <button onclick="this.parentElement.remove()" style="
-                        background: none;
-                        border: none;
-                        color: inherit;
-                        font-size: 18px;
-                        margin-left: 10px;
-                        cursor: pointer;
-                    ">&times;</button>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
+  const formData = new FormData(contactForm);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showNotification(result.message, 'success');
+      contactForm.reset();
+    } else {
+      showNotification(result.message || 'Failed to send message.', 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showNotification('An error occurred. Please try again.', 'error');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+        // Add a basic CSS for the notification pop-up
+const notificationStyle = document.createElement('style');
+notificationStyle.innerHTML = `
+  #notification-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10000;
+    pointer-events: none;
+  }
+  .notification {
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--primary-bg);
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .notification.success {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  .notification.error {
+    background-color: #F44336;
+    color: #fff;
+  }
+  .notification.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+`;
+document.head.appendChild(notificationStyle);
             
             // Animate in
             setTimeout(() => {
@@ -1188,7 +1217,7 @@ p {
                     setTimeout(() => notification.remove(), 300);
                 }
             }, 5000);
-        }
+        ;
 
         // Tilt effect for cards (mobile-friendly)
         function initTiltEffect() {
