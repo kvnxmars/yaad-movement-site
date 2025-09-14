@@ -542,6 +542,46 @@ p {
     transform: translateY(-2px);
 }
 
+/* Notification Styles */
+#notification-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    background: #1A1A1A;
+    color: #F8F8F8;
+    padding: 15px 25px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.notification.success {
+    border-left: 5px solid #4CAF50;
+}
+
+.notification.error {
+    border-left: 5px solid #F44336;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification.hide {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
 /* Enhanced Social Links */
 .social-links {
     list-style: none;
@@ -932,7 +972,7 @@ p {
                 <h2>Meet The Founder</h2> 
                 <div class="about-main">
                     <div class="about-image-placeholder">
-                        <img src="media/Founder Image.jpg" alt="Lebomosa Setle - Founder" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--border-radius-md);">
+                        <img src="Founder Image.jpg" alt="Lebomosa Setle - Founder" style="width: 100%; border-radius: var(--border-radius-md);">
                     </div>
                     <div class="about-text">
                         <h3>Lebomosa Setle (Lebo Strings)</h3> 
@@ -952,24 +992,29 @@ p {
             <div class="container">
                 <h2>Get In Touch</h2>
                 <p>Have questions, suggestions, or just want to say hi? We'd love to hear from you!</p>
-                <form action="https://your-backend-api.com/send-message" method="post" class="contact-form" id="contactForm">
+                <!-- 
+                    The form action is updated to use Formspree, a third-party service.
+                    This allows the form to work without a backend server.
+                    You will need to create a new form on Formspree and replace
+                    'your_formspree_id' with your unique form ID.
+                -->
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/mdkljqjp" method="POST">
                     <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="email" name="_replyto" placeholder="Your Email" required>
                     <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
                 <p style="color: var(--accent-color); margin-top: 15px; text-align: center;">
-                    Or email us directly at <a href="mailto:info@yaadmovement.com">info@yaadmovement.com</a>
+                    Or email us directly at <a href="mailto:yaadmovement@gmail.com">Yaadmovement@gmail.com</a>
                 </p>
 
                 <div class="contact-info text-center">
                     <h3>Follow Our Journey</h3>
                     <p>Stay connected with us on social media:</p>
                     <ul class="social-links">
-                        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@stage.revolution0?_t=ZS-8ziYym9rVyc&_r=1 " aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
+                        <li><a href="https://www.instagram.com/stagerevolution_sa?igsh=MXU2eGYwZ2Y1Ynh6dg%3D%3D&utm_source=qr" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -988,6 +1033,9 @@ p {
             <i class="fas fa-chevron-up"></i>
         </button>
     </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
 
     <script>
         // Loading screen
@@ -1110,259 +1158,79 @@ p {
             });
         });
 
-        // Enhanced Contact Form
+        // Custom Notification Function to replace alert()
+        function showNotification(message, type) {
+            const container = document.getElementById('notification-container');
+            if (!container) return;
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            container.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // --- Frontend JavaScript for Contact Form ---
+        // We're no longer using the custom fetch() call because the form
+        // now submits directly to Formspree, which handles the backend.
+        // The event listener is here to show a confirmation message to the user.
         const contactForm = document.getElementById('contactForm');
-const notificationContainer = document.createElement('div');
-notificationContainer.id = 'notification-container';
-document.body.appendChild(notificationContainer);
+        contactForm.addEventListener('submit', function(event) {
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
 
-function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    notificationContainer.appendChild(notification);
-    setTimeout(() => {
-        notification.classList.add('hide');
-        setTimeout(() => notification.remove(), 500);
-    }, 3000);
-}
+            // Formspree's success redirect handles the actual page change
+            // and provides its own success message. This part is just for
+            // a quick visual confirmation.
+            // Formspree sends back a 302 redirect on success, which means we can't
+            // handle the response with a fetch call. The form submission
+            // will change the page.
 
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+            // To avoid the page change and keep the user on the same page,
+            // we can prevent the default form submission and use a fetch call instead.
+            // This is a more modern approach.
+            event.preventDefault();
 
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Sending...';
-  submitBtn.disabled = true;
+            const data = new FormData(form);
+            const action = event.target.action;
 
-  const formData = new FormData(contactForm);
-  const data = Object.fromEntries(formData.entries());
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
 
-  try {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      showNotification(result.message, 'success');
-      contactForm.reset();
-    } else {
-      showNotification(result.message || 'Failed to send message.', 'error');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    showNotification('An error occurred. Please try again.', 'error');
-  } finally {
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-  }
-});
-
-        // Add a basic CSS for the notification pop-up
-const notificationStyle = document.createElement('style');
-notificationStyle.innerHTML = `
-  #notification-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 10000;
-    pointer-events: none;
-  }
-  .notification {
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--primary-bg);
-    background-color: var(--accent-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .notification.success {
-    background-color: #4CAF50;
-    color: #fff;
-  }
-  .notification.error {
-    background-color: #F44336;
-    color: #fff;
-  }
-  .notification.hide {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-`;
-document.head.appendChild(notificationStyle);
-            
-            // Animate in
-            setTimeout(() => {
-                notification.firstElementChild.style.transform = 'translateX(0)';
-            }, 100);
-            
-            // Auto remove
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.firstElementChild.style.transform = 'translateX(400px)';
-                    setTimeout(() => notification.remove(), 300);
+            fetch(action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            }, 5000);
-        ;
-
-        // Tilt effect for cards (mobile-friendly)
-        function initTiltEffect() {
-            const tiltElements = document.querySelectorAll('[data-tilt]');
-            
-            tiltElements.forEach(element => {
-                element.addEventListener('mouseenter', handleMouseEnter);
-                element.addEventListener('mousemove', handleMouseMove);
-                element.addEventListener('mouseleave', handleMouseLeave);
-                
-                // Touch support for mobile
-                element.addEventListener('touchstart', handleTouchStart);
-                element.addEventListener('touchmove', handleTouchMove);
-                element.addEventListener('touchend', handleTouchEnd);
-            });
-        }
-
-        function handleMouseEnter(e) {
-            e.target.style.transition = 'transform 0.1s ease';
-        }
-
-        function handleMouseMove(e) {
-            const rect = e.target.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            const deltaX = (e.clientX - centerX) / (rect.width / 2);
-            const deltaY = (e.clientY - centerY) / (rect.height / 2);
-            
-            const rotateX = deltaY * -5; // Reduced intensity for mobile
-            const rotateY = deltaX * 5;
-            
-            e.target.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-        }
-
-        function handleMouseLeave(e) {
-            e.target.style.transition = 'transform 0.3s ease';
-            e.target.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        }
-
-        function handleTouchStart(e) {
-            e.target.style.transition = 'transform 0.1s ease';
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const rect = e.target.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            const deltaX = (touch.clientX - centerX) / (rect.width / 2);
-            const deltaY = (touch.clientY - centerY) / (rect.height / 2);
-            
-            const rotateX = deltaY * -3; // Even more subtle for touch
-            const rotateY = deltaX * 3;
-            
-            e.target.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-        }
-
-        function handleTouchEnd(e) {
-            e.target.style.transition = 'transform 0.3s ease';
-            e.target.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        }
-
-        // Initialize tilt effect
-        initTiltEffect();
-
-        // Parallax effect for hero section (performance optimized)
-        const heroSection = document.querySelector('.hero-section');
-        const heroImage = document.querySelector('.hero-picture img');
-        
-        if (heroSection && heroImage) {
-            let parallaxTimeout;
-            
-            function updateParallax() {
-                const scrolled = window.scrollY;
-                const parallaxSpeed = scrolled * 0.5;
-                
-                if (scrolled < heroSection.offsetHeight) {
-                    heroImage.style.transform = `translateY(${parallaxSpeed}px) scale(1.1)`;
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Message sent successfully!', 'success');
+                    form.reset();
+                } else {
+                    showNotification('Oops! There was an error.', 'error');
                 }
-            }
-            
-            window.addEventListener('scroll', () => {
-                if (parallaxTimeout) {
-                    cancelAnimationFrame(parallaxTimeout);
-                }
-                parallaxTimeout = requestAnimationFrame(updateParallax);
-            });
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                
-                if (target) {
-                    const headerHeight = mainHeader.offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+            })
+            .catch(error => {
+                showNotification('An unexpected error occurred.', 'error');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
             });
         });
-
-        // Performance optimization: Debounce resize events
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            if (resizeTimeout) {
-                clearTimeout(resizeTimeout);
-            }
-            resizeTimeout = setTimeout(() => {
-                // Re-calculate any size-dependent elements here
-                setActiveNav();
-            }, 250);
-        });
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set initial active nav
-            setActiveNav();
-            
-            // Add loading complete class to body
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 1500);
-        });
-
-        // Service Worker for offline functionality (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
     </script>
 </body>
 </html>
