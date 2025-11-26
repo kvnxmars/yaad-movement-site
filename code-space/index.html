@@ -492,6 +492,50 @@ p {
     border-color: var(--accent-color);
 }
 
+/* Enhanced Service Grid */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.service-card {
+    background: var(--gradient-2);
+    border: 1px solid rgba(255, 195, 0, 0.3);
+    border-radius: var(--border-radius-md);
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+    opacity: 0.1;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-dark);
+    border-color: var(--accent-color);
+}
+
+
+
 .category-image {
     width: 100px;
     height: 100px;
@@ -862,6 +906,9 @@ p {
                     <li><a href="#hero" class="nav-link active">Home</a></li> 
                     <li><a href="#past-events" class="nav-link">Events</a></li>
                     <li><a href="#aboutus" class="nav-link">About Us</a></li> 
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#abouttheband" class="nav-link">Meet The Band</a></li> 
+                    <li><a href="#aboutme" class="nav-link">About Me</a></li> 
                     <li><a href="#contact" class="nav-link">Contact</a></li> 
                 </ul>
                 <div class="hamburger-menu" id="hamburger">
@@ -956,30 +1003,30 @@ p {
             </div>
         </section>
 
-        <section id="aboutus" class="section-padding bg-dark-alt fade-in-section">
+        <section id="services" class="section-padding bg-dark-alt fade-in-section">
         <h2>Our Services</h2> 
-                <div class="members-grid">
-                    <div class="member-card" data-tilt>
+                <div class="service-grid">
+                    <div class="service-card" data-tilt>
                         <h4>Live Performance Recordings</h4>
                     </div>
-                    <div class="member-card" data-tilt>
-                        <h4>Performance Visuals</h4>
+                    <div class="service-card" data-tilt>
+                        <h4>Live Band & Artist Booking</h4>
                     </div>
-                    <div class="member-card" data-tilt>
+                    <div class="service-card" data-tilt>
                         <h4>Photography</h4>
                     </div>
-                    <div class="member-card" data-tilt>
+                    <div class="service-card" data-tilt>
                         <h4>Event Organising</h4>
                     </div>
-                    <div class="member-card" data-tilt>
-                        <h4>Live Band & Artist Booking</h4>
+                    <div class="service-card" data-tilt>
+                        <h4>Performance Visuals</h4>
                     </div>
                 </div>
             </div>
             </section>
         </section>
 
-         <section id="aboutme" class="section-padding fade-in-section">
+         <section id="abouttheband" class="section-padding fade-in-section">
             <div class="container about-content">
                 <h2>Meet Stage Revolution</h2> 
                 <div class="about-main">
