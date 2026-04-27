@@ -743,6 +743,9 @@ p {
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+.hidden-section {
+    display: none;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -972,12 +975,23 @@ p {
                             <div class="event-description">WE DID IT LAST YEAR AND WE ARE DID IT AGAIN!!!!</div>
                             <a href="" class="btn btn-outline btn-small" target="_blank">See Photos (Coming soon)</a>
                         </div>
+                        <div class="event-image-wrapper">
+                        <img class="event-image" src="autumn.jpeg" alt="Jazz In Autumn">
+                        </div>
+                        <div class="event-info">
+                            <h3>Jazz in Autumn</h3>
+                            <span class="event-date">25 April 2026</span>
+                            <div class ="event-description">Relive some of our favourite moments from our Campus Key Jazz in Autumn event!</div>
+                            <a href="https://drive.google.com/drive/folders/1Mg2_WwDmv3CbTSwOFDvaXqD9PcjWeMyd" class="btn btn-outline btn-small" target="_blank">See Photos</a>
+                        </div>
                     </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
 
-         <section id="future-events" class="section-padding fade-in-section">
+         <section id="future-events" class="section-padding fade-in-section hidden-section">
             <div class="container">
                 <h2>Are You Coming?</h2> 
                 <div class="event-grid future-events-grid">
