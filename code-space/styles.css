@@ -77,6 +77,34 @@ h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
 h4 { font-size: clamp(1rem, 2.5vw, 1.4rem); margin-bottom: 0.5em; }
 p { margin-bottom: 1em; color: var(--light-grey); font-size: clamp(0.9rem, 2vw, 1rem); }
 
+.intro-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 1.2rem; }
+.intro-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-color);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+/* make the space between the hero and the links much smaller */
+.intro-link::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 8px;
+}
+.intro-link:hover {
+    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+}
+
 .main-header { background: rgba(5, 7, 11, 0.72); padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.08); position: fixed; top: 0; width: 100%; z-index: 1000; transition: all 0.3s ease; backdrop-filter: blur(14px); }
 .main-header.scrolled { background: rgba(5, 7, 11, 0.96); box-shadow: var(--shadow-dark); backdrop-filter: blur(18px); }
 .header-content { display: flex; justify-content: space-between; align-items: center; }
