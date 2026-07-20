@@ -66,6 +66,28 @@ const observer = new IntersectionObserver((entries) => {
 }, { root: null, rootMargin: '-50px 0px -50px 0px', threshold: 0.15 });
 fadeInSections.forEach(section => observer.observe(section));
 
+const heroVideo = document.querySelector('.hero-picture video');
+function tryPlayHeroVideo() {
+    if (!heroVideo) return;
+    heroVideo.muted = true;
+    const playPromise = heroVideo.play();
+
+    if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+            heroVideo.dataset.playback = 'autoplayed';
+        }).catch(() => {
+            heroVideo.dataset.playback = 'blocked';
+        });
+    }
+}
+
+window.addEventListener('load', tryPlayHeroVideo);
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) tryPlayHeroVideo();
+});
+window.addEventListener('touchstart', tryPlayHeroVideo, { once: true });
+heroVideo?.addEventListener('click', tryPlayHeroVideo);
+
 const scrollToTopBtn = document.getElementById('scrollToTop');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
