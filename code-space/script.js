@@ -69,23 +69,47 @@ fadeInSections.forEach(section => observer.observe(section));
 const heroVideo = document.querySelector('.hero-picture video');
 function tryPlayHeroVideo() {
     if (!heroVideo) return;
-    heroVideo.muted = true;
-    const playPromise = heroVideo.play();
 
-    if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
+    heroVideo.muted = true;
+    heroVideo.setAttribute('autoplay', '');
+    heroVideo.setAttribute('playsinline', '');
+    heroVideo.setAttribute('webkit-playsinline', '');
+
+    if (heroVideo.readyState >= 2) {
+        const playPromise = heroVideo.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.then(() => {
+                heroVideo.dataset.playback = 'autoplayed';
+            }).catch(() => {
+                heroVideo.dataset.playback = 'blocked';
+            });
+        }
+        return;
+    }
+
+    heroVideo.load();
+    heroVideo.addEventListener('canplaythrough', () => {
+        heroVideo.play().then(() => {
             heroVideo.dataset.playback = 'autoplayed';
         }).catch(() => {
             heroVideo.dataset.playback = 'blocked';
         });
-    }
+    }, { once: true });
+    heroVideo.addEventListener('canplay', () => {
+        heroVideo.play().then(() => {
+            heroVideo.dataset.playback = 'autoplayed';
+        }).catch(() => {
+            heroVideo.dataset.playback = 'blocked';
+        });
+    }, { once: true });
 }
 
-window.addEventListener('load', tryPlayHeroVideo);
+window.addEventListener('load', () => setTimeout(tryPlayHeroVideo, 250));
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) tryPlayHeroVideo();
 });
 window.addEventListener('touchstart', tryPlayHeroVideo, { once: true });
+window.addEventListener('pointerdown', tryPlayHeroVideo, { once: true });
 heroVideo?.addEventListener('click', tryPlayHeroVideo);
 
 const scrollToTopBtn = document.getElementById('scrollToTop');
