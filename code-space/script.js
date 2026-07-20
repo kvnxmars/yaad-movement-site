@@ -25,6 +25,16 @@ navLinkElements.forEach(link => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const heroVideo = document.querySelector('.hero-picture video');
+    if (heroVideo) {
+        heroVideo.muted = true;
+        heroVideo.play().catch(error => {
+            console.log("Autoplay issue handled:", error);
+        });
+    }
+});
+
 const mainHeader = document.getElementById('mainHeader');
 let scrollTimeout;
 function handleScroll() {
